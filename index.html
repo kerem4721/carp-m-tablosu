@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://public-frontend-cos.metadl.com/mgx/img/favicon.png" type="image/png">
+    <title>Çarpım Tablosu Ustası - Ultimate Quiz</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="background">
+        <div class="stars"></div>
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+            <div class="shape shape-5"></div>
+        </div>
+    </div>
+
+    <!-- Main Game Container -->
+    <div class="game-container">
+        <!-- Header -->
+        <header class="game-header">
+            <h1 class="game-title">
+                <span class="title-icon">🏆</span>
+                Çarpım Tablosu Ustası
+                <span class="title-icon">🏆</span>
+            </h1>
+            <div class="header-stats">
+                <div class="stat-item">
+                    <span class="stat-label">Seviye</span>
+                    <span class="stat-value" id="currentLevel">1x Tablosu</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Skor</span>
+                    <span class="stat-value" id="score">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Süre</span>
+                    <span class="stat-value" id="timer">--</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Settings Button -->
+        <button class="settings-btn" id="settingsBtn">
+            <span class="gear-icon">⚙️</span>
+            Ayarlar
+        </button>
+
+        <!-- Game Area -->
+        <main class="game-main">
+            <!-- Welcome Screen -->
+            <div class="welcome-screen" id="welcomeScreen">
+                <div class="welcome-content">
+                    <h2 class="welcome-title">Dünya Şampiyonası'na Hoş Geldin!</h2>
+                    <p class="welcome-text">
+<br>
+                        Sen de 1. olmak için hazır mısın?
+                    </p>
+                    <div class="difficulty-info">
+                        <div class="info-card">
+                            <h3>📚 Kurallar</h3>
+                            <ul>
+                                <li>1x tablosu ile başla</li>
+                                <li>Karışık sorulara geç</li>
+                                <li>2x, 3x... 10x tablolarına ilerle</li>
+                                <li>Yanlış cevap = Başa dön!</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button class="start-btn" id="startBtn">
+                        <span class="btn-text">Yarışmayı Başlat</span>
+                        <span class="btn-icon">🚀</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quiz Screen -->
+            <div class="quiz-screen" id="quizScreen">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                    <div class="progress-text" id="progressText">Soru 1/10</div>
+                </div>
+
+                <div class="question-container">
+                    <div class="question-card">
+                        <div class="question-text" id="questionText">5 × 7 = ?</div>
+                        <div class="answer-input-container">
+                            <input type="number" class="answer-input" id="answerInput" placeholder="Cevabını gir...">
+                            <button class="submit-btn" id="submitBtn">Gönder</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feedback-container" id="feedbackContainer">
+                    <!-- Feedback messages will appear here -->
+                </div>
+            </div>
+
+            <!-- Results Screen -->
+            <div class="results-screen" id="resultsScreen">
+                <div class="results-content">
+                    <div class="trophy-animation">🏆</div>
+                    <h2 class="results-title" id="resultsTitle">Tebrikler!</h2>
+                    <div class="results-stats">
+                        <div class="result-stat">
+                            <span class="result-label">Final Skoru</span>
+                            <span class="result-value" id="finalScore">0</span>
+                        </div>
+                        <div class="result-stat">
+                            <span class="result-label">Ulaşılan Seviye</span>
+                            <span class="result-value" id="finalLevel">1x</span>
+                        </div>
+                        <div class="result-stat">
+                            <span class="result-label">Toplam Süre</span>
+                            <span class="result-value" id="totalTime">0s</span>
+                        </div>
+                    </div>
+                    <button class="restart-btn" id="restartBtn">
+                        <span class="btn-text">Tekrar Oyna</span>
+                        <span class="btn-icon">🔄</span>
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal-overlay" id="settingsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Ayarlar</h3>
+                <button class="close-btn" id="closeModal">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="password-section">
+                    <label for="passwordInput">Şifre Girin:</label>
+                    <input type="password" id="passwordInput" placeholder="090909">
+                    <button class="unlock-btn" id="unlockBtn">Kilidi Aç</button>
+                </div>
+                <div class="settings-section" id="settingsSection" style="display: none;">
+                    <div class="setting-item">
+                        <label for="timeLimit">Soru Başına Süre (saniye):</label>
+                        <input type="number" id="timeLimit" value="30" min="5" max="120">
+                    </div>
+                    <div class="setting-item">
+                        <label for="soundEnabled">Ses Efektleri:</label>
+                        <input type="checkbox" id="soundEnabled" checked>
+                    </div>
+                    <button class="save-btn" id="saveSettings">Ayarları Kaydet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="script.js"></script>
+</body>
+
+</html>
